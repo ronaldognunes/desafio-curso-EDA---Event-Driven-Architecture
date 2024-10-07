@@ -1,0 +1,49 @@
+### Variaveis ####
+@api-wallet = http://localhost:8080 
+@api-consumer = http://localhost:3003
+
+## 1 - Criar a Usuário
+## 1.1 - informar nome 
+## 1.2 - informar e-mail
+POST {{api-wallet}}/clients HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "nome usuario 2",
+    "email": "emailusuario@gmail.com"
+}
+
+
+
+###
+## 2 - Criar conta para Usuário
+## 2.1 - informar client_id 
+## 2.3 - informar saldo da conta
+
+POST {{api-wallet}}/accounts HTTP/1.1
+Content-Type: application/json
+
+{
+    "client_id": "1ce628d3-2431-48db-b0a4-e8276b65f4e8",
+    "balance":1000
+}
+
+###
+## 3 - Efetuar tranferência de uma conta para outra
+## 3.1 - informar id da conta de origem
+## 3.2 - informar id da conta de destino
+## 3.3 - informar valor da transferência
+POST {{api-wallet}}/transactions HTTP/1.1
+Content-Type: application/json
+
+{
+    "account_id_from": "17e09041-804e-4c81-83e4-8359a2d0a5ab",
+    "account_id_to": "883b0a0e-191d-4a2f-b661-2b7f7e191aa8",
+    "amount": 100
+}
+
+###
+## 4 - Consultar saldo da conta
+## 4.1 - informar id da conta
+GET {{api-consumer}}/balance/17e09041-804e-4c81-83e4-8359a2d0a5ab HTTP/1.1
+Accept: application/json
